@@ -782,6 +782,7 @@ function CapstoneTabs(){
 }
 
 function ToolCallout(props){
+  var onOpen=props.onOpen||function(){};
   var isBs=props.tool==="bs";
   var isPl=props.tool==="pl";
   return(
@@ -790,7 +791,7 @@ function ToolCallout(props){
       <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:500,letterSpacing:"0.22em",color:C.teal,textTransform:"uppercase",marginBottom:12}}>Interactive Tool</div>
       <h3 style={{fontFamily:"'Syne',serif",fontWeight:600,fontSize:24,color:C.slate,marginBottom:8}}>{isBs?"Explore a Real Balance Sheet":isPl?"Explore a Real P&L Statement":"Explore a Real Cash Flow Statement"}</h3>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontWeight:300,fontSize:16,color:C.slate,opacity:0.65,marginBottom:20,lineHeight:1.75}}>{isBs?"Switch between Spec House Mid-Build, Post-Flip, and Amazon Store presets. Change any number and watch the equation respond — exactly what QuickBooks shows.":isPl?"Change any number and watch the P&L recalculate instantly. Switch between Spec House, Single Flip, Amazon, and Blank presets.":"Switch presets to see how cash moves differently across business types. This statement explains why profitable businesses sometimes run out of money."}</p>
-      <div onClick={function(){setView("tool-"+(props.tool||"pl"));if(scrollRef.current)scrollRef.current.scrollTop=0;}} style={{background:C.mid,borderRadius:14,padding:"24px 28px",cursor:"pointer",transition:"opacity 0.2s"}} onMouseEnter={function(e){e.currentTarget.style.opacity="0.88";}} onMouseLeave={function(e){e.currentTarget.style.opacity="1";}}>
+      <div onClick={function(){onOpen("tool-"+(props.tool||"pl"));}} style={{background:C.mid,borderRadius:14,padding:"24px 28px",cursor:"pointer",transition:"opacity 0.2s"}} onMouseEnter={function(e){e.currentTarget.style.opacity="0.88";}} onMouseLeave={function(e){e.currentTarget.style.opacity="1";}}>
         <div style={{display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
           <div style={{fontSize:32}}>{isBs?"⚖️":"💵"}</div>
           <div style={{flex:1}}>
@@ -905,7 +906,7 @@ var ALL_MODS=[
       scenario:"Skip tells you: \"Now that you're doing deals, you need to get your accounting set up properly. Go find yourself a good CPA.\"\n\n1. What's the difference between a bookkeeper and a CPA — and why might you need both as your business grows?\n\n2. Write three questions you would ask a CPA when interviewing them for your real estate business. What answers would make you trust them?\n\n3. What does it mean that a CPA is \"licensed\" — and why does that accountability matter when you're working with investors?",
       sys:"Warm accounting tutor. Module 2 covered: bookkeepers vs accountants vs CPAs, CPA licensing, the AICPA, tax accountants, CFOs, forensic accountants, and how to choose the right professional. Give 3-paragraph feedback: what they got right, gaps corrected kindly, and a practical connection to investor conversations. Warm tone, no grades.",
     },
-    yt:{ title:"Bookkeeper vs. Accountant vs. CPA", ch:"Accounting Stuff", why:"Breaks down exactly the distinctions in Module 2. Watch to reinforce who does what and which one you need.", url:"https://www.youtube.com/watch?v=_F6a0ddbjtI" },
+    yt:{ title:"Bookkeeper vs. Accountant vs. CPA", ch:"Accounting Stuff", why:"Breaks down exactly the distinctions in Module 2. Watch to reinforce who does what and which one you need.", url:"https://www.youtube.com/watch?v=XwFIpiPfTLI" },
   },
   { id:3, label:"Module 3 · 30 min", title:"The Accounting\nFramework",
     intro:"Every financial record in every business runs on the same underlying logic. Once you understand the framework, the rest of accounting clicks.",
@@ -989,7 +990,7 @@ var ALL_MODS=[
       scenario:"An investor considering a spec house deal asks: \"Walk me through what the project actually owns right now.\" The house is six weeks into construction.\n\n1. List at least four assets the project likely has. For each one, identify whether it's a current asset or a fixed asset — and explain why you categorized it that way.\n\n2. You mention the construction truck. The investor asks, \"Is it losing value?\" Explain depreciation to them in plain terms.\n\n3. The investor asks why the spec house itself is listed as inventory rather than a fixed asset. How would you explain the distinction?",
       sys:"Warm accounting tutor. Module 4 covered: what an asset is, current assets vs fixed assets, accounts receivable, inventory, cash, depreciation conceptually, appreciation, the balance sheet intro, and how asset profiles differ across real estate and Amazon businesses. Give 3-paragraph feedback: what they got right, gaps corrected kindly, and a practical connection to investor conversations. Warm tone, no grades.",
     },
-    yt:{ title:"Assets — Current vs. Fixed Assets Explained", ch:"Accounting Stuff", why:"A clear visual walkthrough of current vs. fixed assets with real-world examples. Great for reinforcing Module 4 before moving on.", url:"https://www.youtube.com/watch?v=CMv1zlZhb4Q" },
+    yt:{ title:"Assets — Current vs. Fixed Assets Explained", ch:"Accounting Stuff", why:"A clear visual walkthrough of current vs. fixed assets with real-world examples. Great for reinforcing Module 4 before moving on.", url:"https://www.youtube.com/watch?v=rOsuqG_J0t4" },
   },
   { id:5, label:"Module 5 · 30 min", title:"Liabilities & Equity\n— What You Owe & Own",
     intro:"The right side of the accounting equation tells the story of how a business is financed. Understanding it changes how you read every deal.",
@@ -1031,7 +1032,7 @@ var ALL_MODS=[
       scenario:"A private lender asks: Walk me through how this spec house deal is structured financially.\n\nProject details: Land and construction value: $280,000. Construction loan balance: $210,000. Your own capital invested: $70,000.\n\n1. Using the accounting equation, explain the project's financial structure in plain terms.\n\n2. The lender asks: What happens to your equity if construction costs run $30,000 over budget?\n\n3. Why might a lender care about how much of your own money is in the deal — not just whether the numbers pencil out?",
       sys:"Warm accounting tutor. Module 5 covered liabilities, current vs long-term liabilities, construction loans, equity, owner equity, retained earnings, and leverage. Give 3-paragraph feedback: what they got right, gaps corrected kindly, and a practical connection to investor conversations. No grades.",
     },
-    yt:{ title:"Liabilities and Equity Explained", ch:"Accounting Stuff", why:"Covers current and long-term liabilities, equity, and the right side of the balance sheet — exactly what Module 5 introduced.", url:"https://www.youtube.com/watch?v=YZyBSU6YdmM" },
+    yt:{ title:"Liabilities and Equity Explained", ch:"Accounting Stuff", why:"Covers current and long-term liabilities, equity, and the right side of the balance sheet — exactly what Module 5 introduced.", url:"https://www.youtube.com/watch?v=fKRwT10Sszc" },
   },
   { id:6, label:"Module 6 · 30 min", title:"Revenue, Costs\n& Expenses",
     intro:"Once you understand what a business owns and owes, the next question is: how does it make and spend money? This is where the income picture comes alive.",
@@ -1566,7 +1567,7 @@ export default function Course(){
             </div>
           );
         })}
-        {mod.tool&&<ToolCallout tool={mod.tool}/>}
+        {mod.tool&&<ToolCallout tool={mod.tool} onOpen={function(v){setView(v);if(scrollRef.current)scrollRef.current.scrollTop=0;}}/>}
         <div style={{borderTop:"2px solid "+C.dark,margin:"52px 0"}}/>
         <div style={{marginBottom:52}}>
           <div style={EB}>Check for Understanding</div>
