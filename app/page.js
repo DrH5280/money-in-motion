@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Course from "./Course";
 
-const ACCESS_CODE = "motion2024"; // Change this to whatever code you want Skip to share
+// The access code now lives on the server (Vercel env var MIM_ACCESS_CODE).
 
 const C = { slate: "#1C1F2E", ivory: "#F5F0E8", dark: "#EDE7DC", teal: "#00D4B4" };
 
@@ -13,15 +13,21 @@ export default function Page() {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    // Check if already unlocked in this session
-    const saved = sessionStorage.getItem("mim_access");
-    if (saved === "true") setUnlocked(true);
-    setChecking(false);
+    // Ask the server whether this browser is already unlocked.
+    fetch("/api/unlock", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => { if (d.unlocked) setUnlocked(true); })
+      .catch(() => {})
+      .finally(() => setChecking(false));
   }, []);
 
-  const handleSubmit = () => {
-    if (input.trim().toLowerCase() === ACCESS_CODE.toLowerCase()) {
-      sessionStorage.setItem("mim_access", "true");
+  const handleSubmit = async () => {
+    const r = await fetch("/api/unlock", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: input }),
+    }).catch(() => null);
+    if (r && r.ok) {
       setUnlocked(true);
       setError(false);
     } else {
